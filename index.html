@@ -40,6 +40,12 @@
     }
 
     html, body {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
       height: var(--app-height, 100vh);
       max-height: var(--app-height, 100vh);
       margin: 0;
@@ -32034,7 +32040,7 @@
       scrollToBottom(true);
     }
 
-    // 始终自动平滑滚动到底部最新卡片处（多重保障，确保最新卡片整卡完全可见）
+    // 始终自动平滑滚动到底部最新卡片处（纯内部容器滚动，绝不触发外部窗口位移）
     function scrollToBottom(smooth = true) {
       const scrollAction = () => {
         historyContainer.scrollTop = historyContainer.scrollHeight;
@@ -32042,13 +32048,6 @@
           historyContainer.scrollTo({
             top: historyContainer.scrollHeight,
             behavior: smooth ? 'smooth' : 'auto'
-          });
-        }
-        const targetEl = (botThinkingBar.style.display !== 'none') ? botThinkingBar : chainFlow.lastElementChild;
-        if (targetEl && targetEl.scrollIntoView) {
-          targetEl.scrollIntoView({
-            behavior: smooth ? 'smooth' : 'auto',
-            block: 'nearest'
           });
         }
       };
@@ -32645,25 +32644,49 @@
       requestAnimationFrame(animate);
     })();
 
+    // 强制保持 window 原点为 (0,0)，彻底杜绝 iOS/微信把整页顶起出现空白断层
+    function resetWindowScroll() {
+      if (window.scrollY !== 0) {
+        window.scrollTo(0, 0);
+      }
+      if (document.body && document.body.scrollTop !== 0) {
+        document.body.scrollTop = 0;
+      }
+    }
+
     // 移动端动态视口高度与虚拟键盘高度自适应
     function updateAppHeight() {
+      resetWindowScroll();
       const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
       document.documentElement.style.setProperty('--app-height', `${vh}px`);
-      scrollToBottom(false);
+      const canvas = document.getElementById('petal-canvas');
+      if (canvas) {
+        canvas.height = vh;
+      }
     }
 
     if (window.visualViewport) {
       window.visualViewport.addEventListener('resize', updateAppHeight);
-      window.visualViewport.addEventListener('scroll', updateAppHeight);
+      window.visualViewport.addEventListener('scroll', () => {
+        resetWindowScroll();
+        updateAppHeight();
+      });
     }
     window.addEventListener('resize', updateAppHeight);
+    window.addEventListener('scroll', resetWindowScroll);
     window.addEventListener('orientationchange', () => setTimeout(updateAppHeight, 150));
-    updateAppHeight();
 
     idiomInput.addEventListener('focus', () => {
+      resetWindowScroll();
       setTimeout(() => {
+        resetWindowScroll();
         scrollToBottom(true);
       }, 280);
+    });
+
+    idiomInput.addEventListener('blur', () => {
+      resetWindowScroll();
+      setTimeout(resetWindowScroll, 100);
     });
 
     // 页面加载启动
