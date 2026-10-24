@@ -93,124 +93,204 @@
       overflow: hidden;
     }
 
-    /* 顶部导航与数据栏 */
+    /* 顶部超紧凑导航栏 (高度仅 48px，释放超过 70% 的屏幕主视口空间) */
     .header {
-      padding: 12px 16px 10px;
+      padding: 6px 12px;
       background: var(--bg-panel);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border-color);
       flex-shrink: 0;
       position: relative;
-      top: 0;
       z-index: 30;
     }
 
-    .title-row {
+    .header-main-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 10px;
+      gap: 6px;
+      height: 36px;
     }
 
-    .title-group {
-      display: flex;
+    /* 左侧：微型功名印章与得分 */
+    .user-pill {
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
+      background: #FAF7F2;
+      border: 1px solid var(--border-color);
+      padding: 3px 8px 3px 4px;
+      border-radius: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
     }
-
+    .user-pill:active {
+      transform: scale(0.95);
+      background: #F0EBE1;
+    }
     .seal-badge {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 32px;
-      height: 32px;
+      width: 26px;
+      height: 26px;
       background: var(--red-primary);
       color: #FFF;
       font-weight: 700;
-      font-size: 13px;
-      border-radius: 6px;
-      box-shadow: 0 2px 6px rgba(194, 53, 49, 0.35);
-      letter-spacing: 1px;
-      cursor: pointer;
-      user-select: none;
-      transition: transform 0.2s;
+      font-size: 11px;
+      border-radius: 5px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 1px 4px rgba(194, 53, 49, 0.25);
     }
-    .seal-badge:active {
-      transform: scale(0.92);
-    }
-
-    h1 {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--text-main);
-      letter-spacing: 1.5px;
-    }
-
-    .sub-tagline {
+    .user-stats-mini {
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
       font-size: 11px;
       color: var(--text-secondary);
-      background: rgba(47, 111, 117, 0.08);
-      color: var(--cyan-primary);
-      padding: 2px 7px;
-      border-radius: 10px;
       font-weight: 500;
     }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    .score-num {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--red-primary);
+      font-variant-numeric: tabular-nums;
+    }
+    .combo-tag {
+      font-size: 10px;
+      background: var(--red-light);
+      color: var(--red-primary);
+      padding: 1px 4px;
+      border-radius: 8px;
+      font-weight: 700;
+      margin-left: 2px;
     }
 
+    /* 中间：接龙焦点徽标 (大字清晰呈现！) */
+    .target-focus-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: var(--amber-light);
+      border: 1px solid #EED7B8;
+      padding: 3px 10px;
+      border-radius: 18px;
+      user-select: none;
+      flex-shrink: 1;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .target-prefix {
+      font-size: 11px;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+    .target-char {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--amber-primary);
+      line-height: 1;
+    }
+    .target-py {
+      font-size: 11px;
+      color: var(--amber-primary);
+      font-weight: 600;
+    }
+    .target-mode-tip {
+      font-size: 10px;
+      color: var(--text-light);
+      margin-left: 1px;
+    }
+
+    /* 右侧：提示求助与菜单按钮 */
+    .header-right-actions {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+    }
     .icon-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 4px;
-      padding: 6px 10px;
+      gap: 3px;
+      height: 30px;
+      padding: 0 8px;
       background: var(--bg-card);
       border: 1px solid var(--border-color);
-      border-radius: 16px;
+      border-radius: 15px;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--text-secondary);
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
       box-shadow: var(--shadow-sm);
     }
-    .icon-btn:hover {
-      background: #FAF7F2;
-      border-color: #D1C5B5;
-      color: var(--text-main);
-    }
     .icon-btn:active {
-      transform: scale(0.95);
+      transform: scale(0.93);
     }
-    .icon-btn.active {
-      background: var(--red-light);
-      border-color: var(--red-border);
-      color: var(--red-primary);
+    .icon-btn.highlight {
+      background: var(--amber-light);
+      border-color: #EED7B8;
+      color: var(--amber-primary);
+    }
+    .icon-btn.btn-menu {
+      width: 30px;
+      padding: 0;
+      font-size: 14px;
     }
 
-    /* 模式切换栏 */
+    /* 限时模式倒计时细线 (直接吸附在 header 底部，占 3px，不占内容高度) */
+    .timer-line-track {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(232, 213, 186, 0.4);
+      overflow: hidden;
+    }
+    .timer-line-bar {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #D48806, #C23531);
+      transition: width 0.1s linear;
+    }
+    .timer-line-bar.urgent {
+      background: #C23531;
+      animation: pulseAlert 0.5s infinite alternate;
+    }
+
+    /* 菜单弹窗样式 */
+    .menu-section-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
     .mode-bar {
       display: flex;
       gap: 6px;
-      margin-bottom: 10px;
       background: rgba(230, 220, 208, 0.35);
       padding: 3px;
-      border-radius: 20px;
+      border-radius: 12px;
+      margin-bottom: 8px;
     }
     .mode-tab {
       flex: 1;
       border: none;
       background: transparent;
-      padding: 5px 4px;
+      padding: 7px 4px;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--text-secondary);
-      border-radius: 16px;
+      border-radius: 9px;
       cursor: pointer;
       transition: all 0.2s ease;
       text-align: center;
@@ -219,157 +299,73 @@
     .mode-tab.active {
       background: #FFFFFF;
       color: var(--red-primary);
-      font-weight: 600;
       box-shadow: 0 2px 6px rgba(44, 34, 24, 0.08);
     }
 
-    /* 状态计分条 */
     .stats-bar {
       display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
       gap: 6px;
-      background: var(--bg-card);
-      padding: 8px 10px;
-      border-radius: var(--radius-md);
+      background: #FAF7F2;
+      padding: 8px;
+      border-radius: 10px;
       border: 1px solid var(--border-color);
-      box-shadow: var(--shadow-sm);
+      margin-bottom: 8px;
     }
-
     .stat-item {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      position: relative;
     }
-
-    .stat-item:not(:last-child)::after {
-      content: "";
-      position: absolute;
-      right: -3px;
-      top: 20%;
-      height: 60%;
-      width: 1px;
-      background-color: var(--border-color);
-    }
-
     .stat-label {
       font-size: 10px;
       color: var(--text-light);
-      margin-bottom: 2px;
+      margin-bottom: 1px;
     }
-
     .stat-value {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--text-main);
-      font-variant-numeric: tabular-nums;
     }
     .stat-value.highlight-rank {
       color: var(--red-primary);
-      font-size: 13px;
-    }
-    .stat-value.highlight {
-      color: var(--red-primary);
     }
 
-    /* 倒计时进度条 (限时模式) */
-    .timer-container {
-      margin-top: 8px;
-      padding: 6px 10px;
-      background: var(--amber-light);
-      border: 1px solid #F5E5C9;
+    .menu-action-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .menu-action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 42px;
+      padding: 0 14px;
+      background: #FAF7F2;
+      border: 1px solid var(--border-color);
       border-radius: 8px;
-      animation: fadeIn 0.3s;
-    }
-    .timer-label-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--amber-primary);
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-    .timer-track {
-      width: 100%;
-      height: 6px;
-      background: #E8D5BA;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .timer-bar {
-      height: 100%;
-      width: 100%;
-      background: linear-gradient(90deg, #D48806, #C23531);
-      border-radius: 4px;
-      transition: width 0.1s linear;
-    }
-    .timer-bar.urgent {
-      background: #C23531;
-      animation: pulseAlert 0.6s infinite alternate;
-    }
-    @keyframes pulseAlert {
-      from { opacity: 0.7; }
-      to { opacity: 1; }
-    }
-
-    /* 当前接龙要求提示条 */
-    .target-banner {
-      background: #FFF;
-      border-bottom: 1px solid var(--border-color);
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-      flex-shrink: 0;
-      z-index: 20;
-    }
-
-    .target-info {
-      display: flex;
-      align-items: center;
-      gap: 8px;
       font-size: 13px;
-      color: var(--text-secondary);
-    }
-
-    .target-char-box {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 4px;
-      background: var(--amber-light);
-      border: 1px solid #F0DAC0;
-      padding: 2px 10px;
-      border-radius: 12px;
-    }
-
-    .target-char {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--amber-primary);
-      line-height: 1.2;
-    }
-
-    .target-py {
-      font-size: 12px;
-      color: var(--amber-primary);
       font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s ease;
     }
-
-    .target-sub {
-      font-size: 11px;
+    .menu-action-btn:active {
+      background: #F0EBE1;
+      transform: scale(0.98);
+    }
+    .menu-action-btn.restart-action {
+      color: var(--red-primary);
+      background: var(--red-light);
+      border-color: var(--red-border);
+      margin-top: 4px;
+    }
+    .menu-arrow {
       color: var(--text-light);
-    }
-
-    .avail-tag {
       font-size: 12px;
-      background: var(--cyan-light);
-      color: var(--cyan-primary);
-      padding: 3px 9px;
-      border-radius: 12px;
-      border: 1px solid #CFE5E7;
-      font-weight: 500;
     }
 
     /* 接龙历史瀑布流 */
@@ -1224,76 +1220,40 @@
   <div class="app-container">
     <!-- 顶部状态栏 -->
     <header class="header">
-      <div class="title-row">
-        <div class="title-group">
-          <div class="seal-badge" id="rank-badge" title="点击查看科举功名录">布衣</div>
-          <h1>成语接龙</h1>
-          <span class="sub-tagline">字同音同 · 自动接龙</span>
+      <div class="header-main-row">
+        <!-- 左侧：微型功名徽章 + 得分/连击胶囊 -->
+        <div class="user-pill" id="stat-rank-item" title="点击查看科举功名录">
+          <div class="seal-badge" id="rank-badge">布衣</div>
+          <div class="user-stats-mini">
+            <span class="score-num" id="score-val">0</span>分
+            <span class="combo-tag" id="combo-tag" style="display:none;">🔥<span id="combo-val">0</span></span>
+          </div>
         </div>
-        <div class="header-actions">
-          <button class="icon-btn" id="btn-sound" title="音效开关">
-            <span id="sound-icon">🔊</span> 音效
-          </button>
-          <button class="icon-btn" id="btn-dict" title="查看成语词库">
-            <span>📖</span> 词库 (<span id="total-dict-count">0</span>)
-          </button>
-          <button class="icon-btn" id="btn-restart" title="重新开局">
-            <span>🔄</span> 重开
-          </button>
-        </div>
-      </div>
 
-      <!-- 模式切换栏 -->
-      <div class="mode-bar">
-        <button class="mode-tab active" data-mode="relax">🌸 悠闲漫吟</button>
-        <button class="mode-tab" data-mode="timed">⚡ 金榜速对(20s)</button>
-        <button class="mode-tab" data-mode="strict">🎯 严选同字</button>
-      </div>
-
-      <!-- 计分与连击 -->
-      <div class="stats-bar">
-        <div class="stat-item" id="stat-rank-item" style="cursor:pointer;" title="点击查看功名阶梯">
-          <span class="stat-label">官位</span>
-          <span class="stat-value highlight-rank" id="rank-title">布衣</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">得分</span>
-          <span class="stat-value highlight" id="score-val">0</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">连击</span>
-          <span class="stat-value" id="combo-val">0</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">步数</span>
-          <span class="stat-value" id="round-val">1</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">最高分</span>
-          <span class="stat-value" id="best-score-val">0</span>
-        </div>
-      </div>
-
-      <!-- 限时倒计时进度条 (当处于限时模式时显示) -->
-      <div class="timer-container" id="timer-container" style="display:none;">
-        <div class="timer-label-row">
-          <span>⏳ 答题倒计时</span>
-          <span class="timer-sec" id="timer-sec">20s</span>
-        </div>
-        <div class="timer-track">
-          <div class="timer-bar" id="timer-bar" style="width: 100%;"></div>
-        </div>
-      </div>
-    </header>
-
-    <!-- 当前接龙要求提示条 -->
-    <div class="target-banner">
-      <div class="target-info">
-        <span>请接首字：</span>
-        <div class="target-char-box">
+        <!-- 中间：接龙目标首字徽标 (大字清晰无误) -->
+        <div class="target-focus-pill">
+          <span class="target-prefix">接</span>
           <span class="target-char" id="target-char">-</span>
           <span class="target-py" id="target-py">(-)</span>
+          <span class="target-mode-tip" id="target-mode-tip"></span>
         </div>
+
+        <!-- 右侧：求助灯泡 + 菜单设置 -->
+        <div class="header-right-actions">
+          <button class="icon-btn highlight" id="btn-hint" title="提示求助">
+            <span>💡</span><span id="avail-count">0</span>
+          </button>
+          <button class="icon-btn btn-menu" id="btn-menu" title="游戏设置与模式">
+            <span>⚙️</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 限时模式的 3px 微型倒计时进度条 (吸附在 header 底边，不占任何垂直高度) -->
+      <div class="timer-line-track" id="timer-container" style="display:none;">
+        <div class="timer-line-bar" id="timer-bar"></div>
+      </div>
+    </header>
         <span class="target-sub" id="target-mode-tip">或同音字</span>
       </div>
       <div class="avail-tag" id="avail-count-tag">
@@ -1320,20 +1280,6 @@
 
     <!-- 底部吸底操作栏 -->
     <footer class="footer-bar">
-
-      <div class="quick-tools">
-        <button class="tool-btn highlight" id="btn-hint">
-          <span>💡 提示求助</span>
-          <span id="hint-avail-badge" style="font-size:11px; opacity:0.8;"></span>
-        </button>
-        <button class="tool-btn" id="btn-toggle-petals">
-          <span>🌸 落花: 开</span>
-        </button>
-        <button class="tool-btn" id="btn-clear-input">
-          <span>🧹 清空输入</span>
-        </button>
-      </div>
-
       <form class="input-form" id="input-form" onsubmit="return false;">
         <div class="input-wrapper">
           <input 
@@ -1440,6 +1386,74 @@
         </div>
       </div>
       <button class="close-sheet-btn settle-close" id="btn-close-settle">✕</button>
+    </div>
+  </div>
+
+    <!-- ⚙️ 游戏菜单与设置弹窗 -->
+  <div class="modal-overlay" id="menu-modal">
+    <div class="modal-sheet">
+      <div class="sheet-header">
+        <div class="sheet-title">
+          <span>⚙️ 游戏设置与模式</span>
+        </div>
+        <button class="close-sheet-btn" id="btn-close-menu">✕</button>
+      </div>
+      <div class="sheet-body">
+        <div class="menu-section-label">🎮 对弈模式</div>
+        <div class="mode-bar">
+          <button class="mode-tab active" data-mode="relax">🌸 悠闲漫吟</button>
+          <button class="mode-tab" data-mode="timed">⚡ 金榜速对(20s)</button>
+          <button class="mode-tab" data-mode="strict">🎯 严选同字</button>
+        </div>
+
+        <div class="menu-section-label">📊 本局战绩</div>
+        <div class="stats-bar">
+          <div class="stat-item">
+            <span class="stat-label">官位</span>
+            <span class="stat-value highlight-rank" id="rank-title">布衣</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">本局步数</span>
+            <span class="stat-value" id="round-val">1</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">最高纪录</span>
+            <span class="stat-value" id="best-score-val">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">词库总数</span>
+            <span class="stat-value" id="total-dict-count">0</span>
+          </div>
+        </div>
+
+        <div class="menu-section-label">🛠 功能宝库</div>
+        <div class="menu-action-list">
+          <button class="menu-action-btn" id="btn-dict">
+            <span>📖 成语宝库大全 (3万正统成语)</span>
+            <span class="menu-arrow">➜</span>
+          </button>
+          <button class="menu-action-btn" id="btn-view-ranks">
+            <span>🏆 科举功名阶梯录</span>
+            <span class="menu-arrow">➜</span>
+          </button>
+          <button class="menu-action-btn" id="btn-sound">
+            <span><span id="sound-icon">🔊</span> 游戏古典音效</span>
+            <span class="menu-arrow" id="sound-status-tag">已开启</span>
+          </button>
+          <button class="menu-action-btn" id="btn-toggle-petals">
+            <span>🌸 唯美落樱微动效</span>
+            <span class="menu-arrow" id="petals-status-tag">已开启</span>
+          </button>
+          <button class="menu-action-btn restart-action" id="btn-restart">
+            <span>🔄 重新开始全新一局</span>
+          </button>
+        </div>
+
+        <!-- 保持兼容旧 ID 隐藏挂载 -->
+        <span id="hint-avail-badge" style="display:none;"></span>
+        <span id="timer-sec" style="display:none;"></span>
+        <button id="btn-clear-input" style="display:none;"></button>
+      </div>
     </div>
   </div>
 
@@ -31779,6 +31793,7 @@
     // DOM 元素引用
     const scoreVal = document.getElementById('score-val');
     const comboVal = document.getElementById('combo-val');
+    const comboTag = document.getElementById('combo-tag');
     const roundVal = document.getElementById('round-val');
     const bestScoreVal = document.getElementById('best-score-val');
     const rankTitle = document.getElementById('rank-title');
@@ -31799,6 +31814,12 @@
     const btnRestart = document.getElementById('btn-restart');
     const btnHint = document.getElementById('btn-hint');
     const btnDict = document.getElementById('btn-dict');
+    const btnMenu = document.getElementById('btn-menu');
+    const menuModal = document.getElementById('menu-modal');
+    const btnCloseMenu = document.getElementById('btn-close-menu');
+    const btnViewRanks = document.getElementById('btn-view-ranks');
+    const soundStatusTag = document.getElementById('sound-status-tag');
+    const petalsStatusTag = document.getElementById('petals-status-tag');
     const btnSound = document.getElementById('btn-sound');
     const soundIcon = document.getElementById('sound-icon');
     const btnTogglePetals = document.getElementById('btn-toggle-petals');
@@ -31865,9 +31886,11 @@
       if (SoundFX.enabled) {
         soundIcon.textContent = '🔊';
         btnSound.classList.remove('active');
+        if (soundStatusTag) soundStatusTag.textContent = '已开启';
       } else {
         soundIcon.textContent = '🔇';
         btnSound.classList.add('active');
+        if (soundStatusTag) soundStatusTag.textContent = '已静音';
       }
     }
 
@@ -31880,9 +31903,9 @@
 
     // 飘落花瓣开关与 UI
     function updatePetalsUI() {
-      btnTogglePetals.innerHTML = state.petalsEnabled ? '<span>🌸 落花: 开</span>' : '<span>🌸 落花: 关</span>';
       const canvas = document.getElementById('petal-canvas');
       canvas.style.display = state.petalsEnabled ? 'block' : 'none';
+      if (petalsStatusTag) petalsStatusTag.textContent = state.petalsEnabled ? '已开启' : '已关闭';
     }
 
     btnTogglePetals.addEventListener('click', () => {
@@ -31942,14 +31965,16 @@
       targetPyEl.textContent = '(' + last.tailDisplayPy + ')';
 
       if (state.mode === 'strict') {
-        targetModeTip.textContent = '严格同字(不可同音)';
+        targetModeTip.textContent = '·严选同字';
       } else {
-        targetModeTip.textContent = '或同音字';
+        targetModeTip.textContent = '';
       }
 
       const followers = getAvailableFollowers(tailChar, tailPy);
       availCountEl.textContent = followers.length;
       hintAvailBadge.textContent = followers.length > 0 ? ('(' + followers.length + ')') : '(0)';
+
+      idiomInput.placeholder = '输入成语接【' + tailChar + '】' + (state.mode === 'strict' ? ' (严选同字)' : '');
     }
 
     // 渲染卡片
@@ -32114,6 +32139,7 @@
       chainFlow.innerHTML = '';
       scoreVal.textContent = '0';
       comboVal.textContent = '0';
+      if (comboTag) comboTag.style.display = 'none';
       roundVal.textContent = '1';
       updateRankUI();
 
@@ -32224,6 +32250,7 @@
       else Haptics.tap();
       scoreVal.textContent = state.score;
       comboVal.textContent = state.combo;
+      if (comboTag) comboTag.style.display = state.combo > 1 ? 'inline-block' : 'none';
       updateRankUI();
 
       const pyParts = idiomObj.p.split(/\s+/);
@@ -32456,7 +32483,8 @@
       renderRanks();
       rankModal.classList.add('active');
     });
-    rankBadge.addEventListener('click', () => {
+    rankBadge.addEventListener('click', (e) => {
+      e.stopPropagation();
       renderRanks();
       rankModal.classList.add('active');
     });
@@ -32464,6 +32492,30 @@
     rankModal.addEventListener('click', (e) => {
       if (e.target === rankModal) rankModal.classList.remove('active');
     });
+
+    // 菜单设置弹窗事件
+    if (btnMenu) {
+      btnMenu.addEventListener('click', () => {
+        menuModal.classList.add('active');
+      });
+    }
+    if (btnCloseMenu) {
+      btnCloseMenu.addEventListener('click', () => {
+        menuModal.classList.remove('active');
+      });
+    }
+    if (menuModal) {
+      menuModal.addEventListener('click', (e) => {
+        if (e.target === menuModal) menuModal.classList.remove('active');
+      });
+    }
+    if (btnViewRanks) {
+      btnViewRanks.addEventListener('click', () => {
+        menuModal.classList.remove('active');
+        renderRanks();
+        rankModal.classList.add('active');
+      });
+    }
 
     // 词库查看与搜索
     function renderDict(keyword = '') {
