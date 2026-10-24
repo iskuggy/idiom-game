@@ -646,6 +646,7 @@
 
     .input-wrapper {
       flex: 1;
+      min-width: 0;
       position: relative;
       display: flex;
       align-items: center;
@@ -697,6 +698,7 @@
     }
 
     .submit-btn {
+      flex-shrink: 0;
       height: 44px;
       padding: 0 18px;
       background: var(--red-primary);
@@ -1254,12 +1256,6 @@
         <div class="timer-line-bar" id="timer-bar"></div>
       </div>
     </header>
-        <span class="target-sub" id="target-mode-tip">或同音字</span>
-      </div>
-      <div class="avail-tag" id="avail-count-tag">
-        词库可接: <span id="avail-count">0</span> 个
-      </div>
-    </div>
 
     <!-- 接龙历史流 -->
     <main class="history-container" id="history-container">
